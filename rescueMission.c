@@ -2,23 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_QUESTIONS 23
+#define MAXSTARTINGSPEED 100
+#define MAXSTARTINGLENGTH 100
 
 int binSearch(int * values, int target, int size);
+void printArray (int ocean[MAXSTARTINGSPEED][MAXSTARTINGLENGTH], int maxSpeed, int maxLoc);
 
 int main () {
-    int S = 0; // Max starting speed
-    int L = 0; // Max x Length
-    int curRange = 0, index = 0, result = 0;
-    int ocean[L];
-    
-    scanf("%d %d", &S, &L);
-    
-    printf("%d %d\n", S, L);
+    int maxSpeed = 0, maxLoc = 0, curLoc = 0; // Max starting speed and Max x Length
 
-    curRange=S*index;
+    
+    
+    scanf("%d %d", &maxSpeed, &maxLoc);
+    
+    //printf("%d %d\n", maxSpeed, maxLoc); //Test
 
-    printf("%d\n", binSearch(ocean, S, L));
+    //Initalize and fill array of all possible starting speeds and locations. 
+    int ocean[maxSpeed+1][maxLoc+1];
+    for (int i = 0; i <= maxSpeed; i++){
+        for (int j=0; j <= maxLoc; j++) {
+        ocean[i][j]=1;
+        }
+    }
+    printf("intailization working :)\n"); //Test
+    
+
+    printArray (ocean, maxSpeed, maxLoc);
 
     return 1;
 }
@@ -48,4 +57,13 @@ int binSearch(int * values, int target, int size)   {
     // What happened?
     // The value was not in the array
     return -1; // Invalid index
+}
+
+void printArray (int ocean[MAXSTARTINGSPEED][MAXSTARTINGSPEED], int maxSpeed, int maxLoc)   {
+    for (int i = 0; i <= maxSpeed; i++){
+        for (int j=0; j <= maxLoc; j++) {
+        printf("%d ", ocean[i][j]);
+        }
+        printf("\n");
+    }
 }
