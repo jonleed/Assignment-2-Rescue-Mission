@@ -6,7 +6,7 @@
 #define MAXSTARTINGLENGTH 100
 
 int binSearch(int * values, int target, int size);
-void printArray (int ocean[MAXSTARTINGSPEED][MAXSTARTINGLENGTH], int maxSpeed, int maxLoc);
+void printArray (int **ocean, int maxSpeed, int maxLoc);
 
 int main () {
     int maxSpeed = 0, maxLoc = 0, curLoc = 0; // Max starting speed and Max x Length
@@ -18,12 +18,17 @@ int main () {
     //printf("%d %d\n", maxSpeed, maxLoc); //Test
 
     //Initalize and fill array of all possible starting speeds and locations. 
-    int ocean[maxSpeed+1][maxLoc+1];
+    int **ocean;
+    ocean = malloc((maxSpeed+1) * sizeof *ocean);
+    for (int i = 0; i <= maxSpeed; i++){
+        ocean[i] = malloc((maxLoc+1) * sizeof *ocean[i]);
+    }
     for (int i = 0; i <= maxSpeed; i++){
         for (int j=0; j <= maxLoc; j++) {
         ocean[i][j]=1;
         }
     }
+
     printf("intailization working :)\n"); //Test
     
 
@@ -59,7 +64,7 @@ int binSearch(int * values, int target, int size)   {
     return -1; // Invalid index
 }
 
-void printArray (int ocean[MAXSTARTINGSPEED][MAXSTARTINGSPEED], int maxSpeed, int maxLoc)   {
+void printArray (int **ocean, int maxSpeed, int maxLoc)   {
     for (int i = 0; i <= maxSpeed; i++){
         for (int j=0; j <= maxLoc; j++) {
         printf("%d ", ocean[i][j]);
